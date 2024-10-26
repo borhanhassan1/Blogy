@@ -11,7 +11,7 @@ const methodOverride = require("method-override");
 
 const app = express();
 
-const port = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
 connectDB();
 
@@ -44,6 +44,6 @@ app.get("/api/aa", (req, res) => {
   res.json({ status: "5555555555555555" });
 });
 
-app.listen(port, () => {
+app.listen(PORT, () => {
   console.log("app listening ....");
 });
