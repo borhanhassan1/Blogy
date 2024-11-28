@@ -1,0 +1,108 @@
+<head>
+  <!-- Link to Google Material Icons -->
+  <link
+    href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet"
+  />
+</head>
+
+<div class="author">
+  <h1 class="author__heading">Hi, I am Borhan.</h1>
+  <p class="author__body">Backend Developer and Cper.</p>
+</div>
+
+<img
+  src="img/b49c768a309b79354fd24d36b75fa40e.jpg"
+  alt="person looking out through window"
+  class="hero-image"
+  style="width: 900px; height: 528px"
+/>
+
+<section class="articles">
+  <h2 class="articles__heading">Latest Posts</h2>
+  <ul class="article-ul">
+    <% data.forEach(post => { %>
+    <li>
+      <a href="/post/<%= post._id %>">
+        <div class="post-content">
+          <!-- Title -->
+          <h3 class="post-title"><%= post.title %></h3>
+
+          <!-- Likes and Icon Container, aligned vertically -->
+          <div class="likes-container" dir="ltr">
+            <span class="likes-number"><%= post.likes %></span>
+            <span
+              class="<%= post.likes >= 0 ? 'icon-like-green' : 'icon-like-red' %>"
+            >
+              <i class="material-icons">
+                <%= post.likes >= 0 ? 'thumb_up' : 'thumb_down' %>
+              </i>
+            </span>
+          </div>
+
+          <!-- Date -->
+          <span class="article-list__date">
+            <%= post.createdAt.toDateString() %>
+          </span>
+        </div>
+      </a>
+    </li>
+    <% }) %>
+  </ul>
+
+  <div class="pagination__container">
+    <% if (nextPage !== null) { %>
+    <a href="/?page=<%= nextPage %>" class="pagination pagination--next"
+      >View Next Posts</a
+    >
+    <% } %> <% if (prevPage !== null) { %>
+    <a href="/?page=<%= prevPage %>" class="pagination pagination--prev"
+      >View Previous Page</a
+    >
+    <% } %>
+  </div>
+</section>
+
+<style>
+  .pagination__container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+
+  .pagination {
+    padding: 10px 15px;
+    background-color: #0a0e13;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+
+  .pagination:hover {
+    background-color: #eee9e9ec;
+  }
+
+  /* Styling for icon colors */
+  .icon-like-green {
+    color: green;
+  }
+
+  .icon-like-red {
+    color: red;
+  }
+
+  /* Flexbox to align the likes number and icon vertically */
+  .likes-container {
+    display: inline-block;
+    flex-direction: row;
+    align-items: center; /* Center the content vertically */
+  }
+
+  .likes-number {
+    margin-bottom: 5px; /* Small space between the number and the icon */
+  }
+
+  .likes-container .material-icons {
+    font-size: 18px; /* Optional: adjust icon size */
+  }
+</style>
