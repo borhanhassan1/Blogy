@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { LocalStorage } = require("node-localstorage");
-const localStorage = new LocalStorage("./scratch");
+const localStorage = new LocalStorage("/tmp/scratch");
 const Post = require("../models/Post");
 
 const adminLayout = "../views/layouts/admin";
