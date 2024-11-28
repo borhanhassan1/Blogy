@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const expressLayout = require("express-ejs-layouts");
+const path = require("path");
 
 const cookieParser = require("cookie-parser");
 const MongoStore = require("connect-mongo");
@@ -36,6 +37,7 @@ app.use(
 app.use(flash());
 
 app.use(expressLayout);
+app.set("views", path.join(__dirname, "views"));
 app.set("layout", "./layouts/main");
 app.set("view engine", "ejs");
 app.use("/", require("./server/routes/Upload"));
