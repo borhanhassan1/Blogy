@@ -1,7 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const { LocalStorage } = require("node-localstorage");
-const localStorage = new LocalStorage("./scratch");
 const Post = require("../models/Post");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -49,8 +47,7 @@ router.get("/", async (req, res) => {
 router.get("/post/:id", async (req, res) => {
   try {
     let slug = req.params.id;
-    let lastPostId = localStorage.getItem("lastPostId");
-    if (slug != lastPostId && !req.cookies.token) {
+    if (!req.cookies.token) {
       return res.redirect("/login");
     }
     const data = await Post.findById({ _id: slug });

@@ -1,7 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const { LocalStorage } = require("node-localstorage");
-const localStorage = new LocalStorage("/tmp/scratch");
 const Post = require("../models/Post");
 
 const adminLayout = "../views/layouts/admin";
@@ -58,7 +56,6 @@ router.post("/add-post", authMiddleware, verifyAdminRole, async (req, res) => {
       });
 
       await Post.create(newPost);
-      localStorage.setItem("lastPostId", newPost._id);
       res.redirect("/dashboard");
     } catch (error) {
       console.log(error);
